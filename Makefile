@@ -7,8 +7,8 @@ INCLUDES := -Iinclude
 CFLAGS := $(CSTD) $(INCLUDES) $(WARNINGS) -ffreestanding
 
 # Ignore this sed... I'm anal retentive. 
-LIBC_SOURCES := $(shell find src -name **.c)
-LIBC_OBJECTS := $(shell echo $(addprefix build/, $(shell echo $(LIBC_SOURCES:.c=.o))))
+LIBC_SOURCES := $(shell find src -name **.c )
+LIBC_OBJECTS := $(shell echo $(addprefix build/, $(shell echo $(LIBC_SOURCES:.c=.o) | sed 's/src\///g')))
 LIBK_OBJECTS := $(shell echo $(LIBC_OBJECTS:.o=.libk.o))
  
 CPP_FLAGS = -D__is_libc
@@ -32,7 +32,7 @@ all-libc:
 # build/libk.a: $(LIBK_OBJECTS)
 # 	$(AR) rcs $@ $^
 # 
-$(LIBC_OBJECTS): build%.o: .%.c
+$(LIBC_OBJECTS): build%.o: src%.c
 	@mkdir -p $(@D)
 	$(CC) $(INCLUDES) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
  
