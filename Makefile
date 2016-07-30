@@ -6,8 +6,9 @@ WARNINGS := -Wall -Werror -Wextra
 INCLUDES := -Iinclude
 CFLAGS := $(CSTD) $(INCLUDES) $(WARNINGS) -ffreestanding
 
-LIBC_SOURCES := $(shell find . -name **.c)
-LIBC_OBJECTS := $(shell echo $(addprefix build/, $(shell echo $(LIBC_SOURCES:.c=.o))) | sed 's/\.\///g')
+# Ignore this sed... I'm anal retentive. 
+LIBC_SOURCES := $(shell find src -name **.c)
+LIBC_OBJECTS := $(shell echo $(addprefix build/, $(shell echo $(LIBC_SOURCES:.c=.o))))
 LIBK_OBJECTS := $(shell echo $(LIBC_OBJECTS:.o=.libk.o))
  
 CPP_FLAGS = -D__is_libc
