@@ -2,8 +2,10 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <string.h>
- 
-static void print(const char* data, size_t data_length)
+
+#include <kernel/tty.h>
+
+__attribute__((__unused__)) static void print(const char* data, size_t data_length)
 {
 	for ( size_t i = 0; i < data_length; i++ )
 		putchar((int) ((const unsigned char*) data)[i]);
@@ -11,10 +13,14 @@ static void print(const char* data, size_t data_length)
  
 int printf(const char* restrict format, ...)
 {
-	va_list parameters;
-	va_start(parameters, format);
- 
+
 	int written = 0;
+	va_list parameters;
+	va_start(parameters, format);	
+#if defined(__is_kernel)
+	terminal_printf(format, parameters);
+#else	
+ 
 	size_t amount;
 	bool rejected_bad_specifier = false;
  
@@ -64,6 +70,7 @@ int printf(const char* restrict format, ...)
 	}
  
 	va_end(parameters);
+#endif
  
 	return written;
 }
