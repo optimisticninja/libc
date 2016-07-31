@@ -11,7 +11,7 @@ LIBC_SOURCES := $(shell find src -name **.c )
 LIBC_OBJECTS := $(shell echo $(addprefix build/, $(shell echo $(LIBC_SOURCES:.c=.o) | sed 's/src\///g')))
 LIBK_OBJECTS := $(shell echo $(LIBC_OBJECTS:.o=.libk.o))
  
- CPP_FLAGS := -D__is_libc
+CPP_FLAGS := -D__is_libc
 LIBK_CFLAGS := $(CFLAGS)
 LIBK_CPPFLAGS := $(CPP_FLAGS) -D__is_kernel
 
