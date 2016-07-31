@@ -1,6 +1,6 @@
 
-build/
-sysroot/
+build/*
+sysroot/*
 
 # Created by https://www.gitignore.io/api/assembler,c++,c,eclipse,kdevelop4
 

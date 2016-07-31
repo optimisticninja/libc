@@ -57,5 +57,4 @@ install: install-headers install-libs
 # #	nasm -felf32 $< -o $@
 # 
 clean:
-	rm -fv $(LIBC_OBJECTS) $(LIBC_ARCH_ASM_OBJECTS) $(LIBK_OBJECTS) $(BINARIES)
-	find sysroot/usr/lib -name '*.a' -type f -delete
+	rm -rfv build sysroot
