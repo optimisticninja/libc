@@ -25,7 +25,7 @@ all-libc:
 	$(MAKE) $(LIBC_OBJECTS)
 	$(MAKE) $(LIBK_OBJECTS)
 	$(MAKE) $(BINARIES)
-	$(MAKE) install-libc
+	$(MAKE) install
 
 build/libc.a: $(LIBC_OBJECTS) $(LIBC_ARCH_ASM_OBJECTS)
 	$(AR) rcs $@ $^
@@ -43,19 +43,19 @@ $(LIBC_OBJECTS): build%.o: src%.c
 $(LIBK_OBJECTS): build%libk.o: src%c
 	$(CC) $(LIBK_INCLUDES) $(LIBK_CFLAGS) $(LIBK_CPPFLAGS) -c $< -o $@
 
-install-libc-headers:
+install-headers:
 	mkdir -p $(DESTDIR)$(INCLUDEDIR)
 	cp -RTv include $(DESTDIR)$(INCLUDEDIR)
 
-install-libc-libs:
+install-libs:
 	mkdir -p $(DESTDIR)$(LIBDIR)
 	cp $(BINARIES) $(DESTDIR)$(LIBDIR)
 
-install-libc: install-libc-headers install-libc-libs
+install: install-headers install-libs
 # 
 # #$(LIBC_ARCH_ASM_OBJECTS): build%.o: libc%.asm
 # #	nasm -felf32 $< -o $@
 # 
-clean-libc:
+clean:
 	rm -fv $(LIBC_OBJECTS) $(LIBC_ARCH_ASM_OBJECTS) $(LIBK_OBJECTS) $(BINARIES)
 	find sysroot/usr/lib -name '*.a' -type f -delete
