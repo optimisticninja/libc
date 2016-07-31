@@ -5,7 +5,7 @@ AR := x86_64-elf-ar
 CSTD := -std=gnu11
 WARNINGS := -Wall -Werror -Wextra
 INCLUDES := -Iinclude -I../kernel/include
-CFLAGS := $(CSTD) $(WARNINGS) -nostdlib
+CFLAGS := $(CSTD) $(WARNINGS) -ffreestanding 
 
 LIBC_SOURCES := $(shell find src -name **.c )
 LIBC_OBJECTS := $(shell echo $(addprefix build/, $(shell echo $(LIBC_SOURCES:.c=.o) | sed 's/src\///g')))
