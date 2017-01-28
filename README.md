@@ -4,7 +4,6 @@ libc implementation for 'kernel' repo. Moved from bitbucket.
 ## Requirements
 
     * Cross compiled Binutils/GCC for x86_64 Use my script
-    * NASM
 
 ## Building
 
