@@ -2,7 +2,7 @@
 
 char* itoa(int value, char* result, int base)
 {	
-	if ( base < 2 || base > 36 ) {
+	if (base < 2 || base > 36) {
 		*result = '\0';
 		return result;
 	}                                                                                                               
@@ -15,6 +15,7 @@ char* itoa(int value, char* result, int base)
 		value /= base;
 		*ptr++ = "zyxwvutsrqponmlkjihgfedcba9876543210123456789abcdefghijklmnopqrstuvwxyz"[35 + (tmp_value - value * base)];
 	} while (value);
+	
 	if (tmp_value < 0)
 		*ptr++ = '-';
 	
