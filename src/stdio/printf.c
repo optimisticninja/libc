@@ -57,6 +57,16 @@ int printf(const char* restrict format, ...)
 			format++;
 			const char* s = va_arg(parameters, const char*);
 			print(s, strlen(s));
+		} else if (*format == 'd') {
+			format++;
+			int i = va_arg(parameters, int);
+			char* ia = itoa(i, NULL, 10);
+			print(ia, strlen(ia));
+		} else if (*format == 'u') {
+			format++;
+			unsigned u = va_arg(parameters, unsigned);
+			char* ua = itoa(u, NULL, 10);
+			print(ua, strlen(ua));
 		} else {
 			goto incomprehensible_conversion;
 		}
